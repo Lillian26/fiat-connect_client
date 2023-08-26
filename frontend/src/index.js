@@ -7,9 +7,6 @@ console.log("window.ethereum: ", window.ethereum)
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
-const BACKEND_ADDR = "http://localhost:3000";
-const BACKEND_FC_ADDR = "https://binusu.cryptosavannah.com/auth/login";
-
 async function getChainId() {
     const chainId = await provider.getNetwork().then(network => network.chainId);
     return chainId;
@@ -17,7 +14,7 @@ async function getChainId() {
 
 
 async function createSiweMessage(address, statement) {
-    const res = await fetch(`${BACKEND_ADDR}/nonce`, {
+    const res = await fetch(`${process.env.BACKEND_ADDR}/nonce`, {
         credentials: 'include',
     });
 
